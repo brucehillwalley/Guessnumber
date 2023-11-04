@@ -69,7 +69,7 @@ document.querySelector(".again").onclick = () => {
 
   document.querySelector(".guess").value = "";
 
-  mesaj.textContent = "Oyun Yeni Oyuncu İçin Başlıyor5";
+  mesaj.textContent = "Oyun Yeni Oyuncu İçin Başlıyor";
 };
 
 //! ENTER
