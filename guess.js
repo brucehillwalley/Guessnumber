@@ -29,6 +29,9 @@ document.querySelector(".check").addEventListener("click", () => {
     mesaj.textContent = "Tebrikler Bildiniz👏";
     document.querySelector("body").style.backgroundColor = "green";
     document.querySelector(".number").textContent = rastgeleSayi;
+    document.querySelector(".check").disabled="true"
+    document.querySelector(".number").disabled="true"
+
 
     // top Score kontrolü
 
