@@ -1,6 +1,8 @@
 //?Pcye 1-20 arasında sayı tutturduk
 let rastgeleSayi = Math.ceil(Math.random() * 20);
 
+// let rastgeleSayi=Math.floor(Math.random()*21) //0 dahil olmasını istiyorsak kullanabiliriz again de de değişiklik lazım
+
 console.log(rastgeleSayi);
 
 let mesaj = document.querySelector(".msg");
@@ -8,8 +10,12 @@ let mesaj = document.querySelector(".msg");
 let skor = 10;
 //*skor u index.html den çekebilirdik. Ama çok kullanacağımız için bu daha tercih edilen yol.
 
-//!
+//! local-storage da top-score adında değişken varsa onu getir yoksa 0 olsun
+//!sayfa yenilendiğinde localStorage dan alır
 let enYuksekSkor = localStorage.getItem("top-score") || 0;
+
+//! ------browserda, DOM da top score değerini local storage dan okuyarak güncelle, özellikle 2. ve 3. oyuncular için gerekli
+document.querySelector(".top-score").textContent = enYuksekSkor;
 
 //? Her Check butonuna basıldığında yapılacaklar
 document.querySelector(".check").addEventListener("click", () => {
@@ -17,18 +23,17 @@ document.querySelector(".check").addEventListener("click", () => {
 
   //! tahmin girmeden butona basıldıysa
   if (!tahmin) {
-    mesaj.textContent = "Lütfen bir sayı giriniz";
+    mesaj.textContent = "Lütfen 1-20 arasında bir sayı giriniz";
     //! tahmin doğruysa
   } else if (tahmin == rastgeleSayi) {
-    mesaj.textContent = "Tebrikler Bildiniz💪";
+    mesaj.textContent = "Tebrikler Bildiniz👏";
     document.querySelector("body").style.backgroundColor = "green";
     document.querySelector(".number").textContent = rastgeleSayi;
 
     // top Score kontrolü
+
     if (skor > enYuksekSkor) {
       localStorage.setItem("top-score", skor);
-
-      document.querySelector(".top-score").textContent = enYuksekSkor;
 
       enYuksekSkor = skor;
       document.querySelector(".top-score").textContent = enYuksekSkor;
@@ -54,7 +59,8 @@ document.querySelector(".check").addEventListener("click", () => {
   }
 });
 
-//
+// Again butonuna basınca ayarlar başlangıç değerlerine kurulun. Arka plan #2d3436 olsun
+
 
 document.querySelector(".again").onclick = () => {
   document.querySelector("body").style.backgroundColor = "#2d3436";
@@ -91,16 +97,15 @@ document.addEventListener("keydown", function (event) {
 
 // console.log(localStorage.getItem("BRUCE"));
 
+document.querySelector(".check").addEventListener("click", () => {
+  tahmin = document.querySelector(".guess").value;
 
-document.querySelector(".check").addEventListener("click", ()=>{
-    tahmin=document.querySelector(".guess").value
+  const tahminSayi = parseInt(tahmin);
 
-    const tahminSayi = parseInt(tahmin)
-
-    if (tahminSayi>=1 && tahminSayi<=20 && !isNaN(tahminSayi)) {
-        //* doğru sayı girmişse onu devam ettir.
-    }else{
-        mesaj.textContent="Geçersiz sayı girdiniz (1 ile 20 arasında sayı girin)"
-        skor++
-    }
-})
+  if (tahminSayi >= 1 && tahminSayi <= 20 && !isNaN(tahminSayi)) {
+    //* doğru sayı girmişse onu devam ettir.
+  } else {
+    mesaj.textContent = "Geçersiz sayı girdiniz (1 ile 20 arasında sayı girin)";
+    skor++;
+  }
+});
