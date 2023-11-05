@@ -29,9 +29,8 @@ document.querySelector(".check").addEventListener("click", () => {
     mesaj.textContent = "Tebrikler Bildiniz👏";
     document.querySelector("body").style.backgroundColor = "green";
     document.querySelector(".number").textContent = rastgeleSayi;
-    document.querySelector(".check").disabled="true"
-    document.querySelector(".number").disabled="true"
-
+    document.querySelector(".check").disabled = "true";
+    document.querySelector(".guess").disabled = "true";
 
     // top Score kontrolü
 
@@ -56,7 +55,8 @@ document.querySelector(".check").addEventListener("click", () => {
       mesaj.textContent = "Oyunu Kaybettiniz😢";
       document.querySelector(".score").textContent = 0;
       document.querySelector("body").style.backgroundColor = "red";
-
+      document.querySelector(".check").disabled = "true";
+      document.querySelector(".guess").disabled = "true";
       //!oyunu kaybettiniz
     }
   }
@@ -64,13 +64,15 @@ document.querySelector(".check").addEventListener("click", () => {
 
 // Again butonuna basınca ayarlar başlangıç değerlerine kurulun. Arka plan #2d3436 olsun
 
-
 document.querySelector(".again").onclick = () => {
   document.querySelector("body").style.backgroundColor = "#2d3436";
 
   rastgeleSayi = Math.ceil(Math.random() * 20);
   console.log(rastgeleSayi);
   skor = 10;
+
+  document.querySelector(".check").disabled = false;
+  document.querySelector(".guess").disabled = false;
 
   document.querySelector(".score").textContent = skor;
 
